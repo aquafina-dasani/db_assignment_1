@@ -5,8 +5,8 @@ import mysql.connector
 # Use the same credentials you use to run your main app
 config = {
     'host': 'localhost',
-    'user': 'your_username',
-    'password': 'your_password'
+    'user': 'root',
+    'password': '1220'
 }
 DB_NAME = 'dictionary'
 TABLE_NAME = 'word'
