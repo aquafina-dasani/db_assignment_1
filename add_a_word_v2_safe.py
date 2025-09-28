@@ -55,8 +55,8 @@ def prompt_word(my_cursor, my_db):
     """Add word to database if it doesn't exist. Change word in database if it does exist."""
     first_word = input("What word would you like to add/change >> ")
 
-    # See if word is in database already
-    my_cursor.execute(f"SELECT word FROM dictionary.word WHERE word = '{first_word}'")
+    # See if word is in database already!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    my_cursor.execute("SELECT * FROM dictionary.word WHERE word = %s", (first_word, ))
     check = my_cursor.fetchone()
 
 
@@ -65,14 +65,14 @@ def prompt_word(my_cursor, my_db):
         print(check)
 
         second_word = input(f"Change {first_word} to >> ")
-        my_cursor.execute(f"UPDATE dictionary.word SET word = '{second_word}' WHERE word = '{first_word}'")
+        my_cursor.execute("UPDATE dictionary.word SET word = %s WHERE word = %s", (second_word, first_word))
 
         print(f"Changed '{first_word}' to '{second_word}' in the database")
     
 
     else:
         print(f"The word '{first_word}' was not found... adding")
-        my_cursor.execute(f"INSERT INTO dictionary.word (word) VALUES ('{first_word}')")
+        my_cursor.execute("INSERT INTO dictionary.word (word) VALUES (%s)", (first_word, ))
 
     my_db.commit()
 
